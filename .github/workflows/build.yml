@@ -1,0 +1,27 @@
+name: Delivery
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  IMAGE: asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/covid19-status-of-medical-care-provision-in-japan:${{ github.sha }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: gcp auth
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - name: configure docker
+        run: gcloud auth configure-docker --quiet
+      - name: build image
+        run: docker build . -t $IMAGE
+      - name: push image
+        run: docker push $IMAGE
