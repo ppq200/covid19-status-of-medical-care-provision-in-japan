@@ -6,14 +6,14 @@ app = Flask(__name__)
 
 @app.route("/health")
 def health():
-    print("ok", flush=True)
-    return "ok"
+    return "health is ok"
 
 
 @app.route("/do", methods=["POST"])
 def do():
-    main()
-    return "ok"
+    message = main()
+    app.logger.info(message)
+    return message
 
 
 if __name__ == "__main__":
