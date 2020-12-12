@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  IMAGE: asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/covid19-status-of-medical-care-provision-in-japan:${{ github.sha }}
+  IMAGE: asia.gcr.io/${{ secrets.GCP_PROJECT_ID }}/covid19-status-of-medical-care-provision-in-japan
 
 jobs:
   build:
@@ -14,6 +14,9 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: gcp auth
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -22,6 +25,6 @@ jobs:
       - name: configure docker
         run: gcloud auth configure-docker --quiet
       - name: build image
-        run: docker build . -t $IMAGE
+        run: docker build . -t $IMAGE:${{ steps.vars.outputs.sha_short }}
       - name: push image
-        run: docker push $IMAGE
+        run: docker push $IMAGE:${{ steps.vars.outputs.sha_short }}
