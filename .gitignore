@@ -3,6 +3,5 @@ __pycache__/
 *$py.class
 
 *.xlsx
-service_account.json
 .env
-
+credentials/*.json

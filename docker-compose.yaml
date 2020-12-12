@@ -3,7 +3,7 @@ services:
   app:
     build: .
     environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=/app/service_account.json
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/credentials/service_account.json
       - PORT=8080
       - FLASK_DEBUG=True
     volumes:
