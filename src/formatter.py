@@ -13,7 +13,6 @@ def get_formated_df(unformat_df):
                 #
                 # 医療提供体制
                 #
-                # ステージ3の指標: 25%  ステージ4の指標: なし
                 "Unnamed: 3": "確保_病床使用率",
                 "Unnamed: 4": "確保_病床使用率_前週差",
                 "Unnamed: 5": "確保想定_病床使用率",
