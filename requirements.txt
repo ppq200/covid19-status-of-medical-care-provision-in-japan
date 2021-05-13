@@ -1,6 +1,6 @@
 gspread==3.6.0
 pandas==1.1.5
-pydantic==1.7.3
+pydantic==1.7.4
 python-dotenv==0.15.0
 google-auth==1.23.0
 requests==2.25.0
